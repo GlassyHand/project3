@@ -1,0 +1,2204 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>My Website</title>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+
+
+  <style>
+    @font-face {
+      font-family: 'Freesentation-2Extralight';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2404@1.0/Freesentation-2Extralight.woff2') format('woff2');
+      font-weight: 200;
+      font-style: normal;}
+    @font-face {
+      font-family: 'Freesentation-3Light';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2404@1.0/Freesentation-3Light.woff2') format('woff2');
+      font-weight: 300;
+      font-style: normal;}
+    @font-face {
+      font-family: 'Freesentation-6SemiBold';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2404@1.0/Freesentation-6SemiBold.woff2') format('woff2');
+      font-weight: 600;
+      font-style: normal;}
+
+    #pills {position: fixed;
+        width: 100%;
+        height: auto;
+        pointer-events: none;
+        z-index: 100;
+        transition: transform 1s ease-out;
+        filter: hue-rotate(90deg) brightness(1.2) saturate(150%);}
+
+
+    * {box-sizing: border-box;}
+    html, body { overflow-x: hidden; background: black; }
+    html { scroll-behavior: smooth; }
+
+    .left-spacing {padding-left: 600px; 
+    padding-bottom: 90px;
+    word-break: keep-all;}
+    .right-spacing {padding-right: 600px; 
+    padding-bottom: 90px;
+    word-break: keep-all;}
+    .center-spacing {margin: 0 auto; 
+    padding: 300px 0px;
+    width: 430px; 
+    word-break: keep-all;
+    text-align: center;}
+    .center-spacing2 {margin: 0 auto; 
+    padding-top: 300px;
+    width: 400px; 
+    word-break: keep-all;
+    text-align: center;}
+    .center-spacing3 { margin: 0 auto; 
+    width: 500px; 
+    text-align: center;}
+
+    .right-spacing2{
+    width: 22%; /* or 50% - 간격 보고 조정 */
+    word-break: keep-all;}
+    .left-spacing2 {
+    width: 102%;
+    word-break: keep-all;}
+
+
+    .wrap {width: 1000px;
+      margin: auto;
+      position: relative;}
+
+      .wrap2 {display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* 필요에 따라 center로 조정 가능 */
+  width: 1200px;
+  margin: 0 auto;}
+
+    .planet-wrapper {
+      position: relative;
+      overflow: hidden;}
+
+    /* Typography */
+    .zen-dots { font-family: "Zen Dots", sans-serif; }
+    .encode-sans-condensed { font-family: "Encode Sans Condensed", sans-serif; font-weight: 500; }
+    .freesentation-extralight { font-family: "Freesentation-2Extralight", sans-serif; font-weight: 200; }
+    .freesentation-light { font-family: "Freesentation-3Light", sans-serif; font-weight: 300; }
+    .freesentation-regular { font-family: "Freesentation-4Regular", sans-serif; font-weight: 400; }
+    .freesentation-semibold { font-family: "Freesentation-6SemiBold", sans-serif; font-weight: 600; }
+
+    .text-logo { font-size: 4rem; }
+    .text-logo2 { font-size: 4.4rem; }
+    .text-tiny { font-size: 0.8rem; }
+    .text-one { font-size: 1rem; }
+    .text-onedottwo { font-size: 1.2rem; }
+    .text-onedotthree { font-size: 1.3rem; }
+    .text-onedotfive { font-size: 1.5rem; }
+    .text-two { font-size: 2rem; }
+    .text-twodotfive { font-size: 2.5rem; }
+    .text-white { color: white; }
+    .text-gray { color: #666; }
+    .text-green {color: #00ff88;}
+    .text-black {color: black;}
+
+    .name {margin-bottom: 8px;}
+
+    /* Navigation */
+    ul { list-style: none; }
+    ul li a {position: relative;
+      text-decoration: none;
+			display: block;
+			padding: 8px 12px;
+      color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      z-index: 1001;
+      transition: color 0.4s ease;}
+    ul li a::before {content: "";
+      position: absolute;
+      inset: 0;
+      background: #00ff88;
+      filter: blur(10px);
+      opacity: 0;
+      z-index: -1;
+      border-radius: 10px;
+      transition: all 0.4s ease;
+    }
+    ul li a:hover::before {
+      opacity: 1;
+      filter: blur(0);
+    }
+    ul li a:hover {
+      color: black;
+    }
+    .nav-background {
+      background: linear-gradient(to top, #263b26 0%, #000 50%);
+      padding: 10px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;}
+
+    /* Layout Helpers */
+    .flex {display: flex;
+      justify-content: space-between;
+      gap: 50px;}
+
+    header {padding: 200px 0;}
+    header h1 {color: white;
+      font-size: 3em;}
+    header p {color: #666;
+      font-size: 1.5em;
+      padding-top: 10px; }
+    p{line-height: 1.5;}
+    section {margin: 200px 0px 400px 0px;}
+
+
+    .little-little {
+      position: absolute;
+      text-align: right;
+      right: 316px;
+      top: 370px;
+      width: 300px;}
+    .little-little2 {
+      font-size: 1.3rem;
+      position: absolute;
+      top: 487px;
+      right: 300px;
+      width: 700px;}
+
+    /* Earth Image */
+    .img-greenearth {position: absolute;
+      top: -350px;
+      left: 1000px;
+      width: 800px;
+      height: auto;
+      pointer-events: none;
+      animation: 
+        rotateEarth 60s linear infinite,
+        glowEffect 10s ease-in-out infinite;}
+
+    @keyframes rotateEarth {from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); } }
+    @keyframes glowEffect {0%   { filter: brightness(1) drop-shadow(0 0 0 rgba(144, 238, 144, 0)); }
+      50%  { filter: brightness(1.3) drop-shadow(0 0 30px rgba(144, 238, 144, 0.5)); }
+      100% { filter: brightness(1) drop-shadow(0 0 0 rgba(144, 238, 144, 0)); }}
+
+
+.news-imgs-row {display: flex;
+  gap: 0px;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;}
+.news-img {width: 330px; 
+  transform: translateX(-80px);
+  opacity: 0;
+  filter: brightness(0.5) blur(50px);
+  box-shadow: -100px 100px 100px rgba(0, 0, 0, 0.9);
+  transition: all 1s ease;
+  z-index: 1;
+  margin-right: -80px;}
+.news-img.show {
+  transform: translateX(0);
+  opacity: 1;
+  filter: brightness(1) blur(0);}
+.left-delay1 { transition-delay: 1s; }
+.left-delay2 { transition-delay: 1.5s; }
+.left-delay3 { transition-delay: 2s; }
+.flex-align { display: flex;
+        align-items: flex-start;
+        gap: 60px;}
+
+        .kitbox-img1{position:absolute;
+        top: -300px;
+        left: 300px;
+        width: 400px;
+        height: auto;
+        z-index: 0;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1s ease-out;}
+        .kitbox-img2{position:absolute;
+        top: -40px;
+        left: 350px;
+        width: 300px;
+        height: auto;
+        z-index: 1;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1s ease-out;}
+        .kitbox-img3{position:absolute;
+        top: 60px;
+        left: 300px;
+        width: 400px;
+        height: auto;
+        z-index: 0;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1s ease-out;}
+
+        .kitbox-img1.show, .kitbox-img2.show, .kitbox-img3.show {
+          opacity: 1;
+          transform: translateY(0);}
+
+        .left-delay1 { transition-delay: 0.5s; }
+        .left-delay2 { transition-delay: 1s; }
+        .left-delay3 { transition-delay: 1.5s; }
+
+        .box2-img{position:absolute;
+        top: -300px;
+        left: 500px;
+        width: 400px;
+        height: auto;
+        z-index: 0;
+        opacity: 0;}
+        .object1-img{position:absolute;
+        top: -80px;
+        left: 660px;
+        width: 140px;
+        height: auto;
+        z-index: 0;
+        opacity: 0;
+        transform: translateX(100px);
+        transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);}
+        .object2-img{position:absolute;
+        top: -80px;
+        left: 750px;
+        width: 140px;
+        height: auto;
+        z-index: 0;
+        opacity: 0;
+        transform: translateX(100px);
+        transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);}
+        .object3-img{position:absolute;
+        top: -80px;
+        left: 850px;
+        width: 140px;
+        height: auto;
+        z-index: 0;
+        opacity: 0;
+        transform: translateX(100px);
+        transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);}
+
+        .object1-img.show, .object2-img.show, .object3-img.show {
+          opacity: 1;
+          transform: translateX(0);}
+
+        .object1-img { transition-delay: 0.3s; }
+        .object2-img { transition-delay: 0.6s; }
+        .object3-img { transition-delay: 0.9s; }
+
+        .flex-container {display: flex;
+        align-items: flex-start;
+        gap: 80px;}
+        .text-box {flex: 1;
+        max-width: 600px;
+        padding-left: 200px; }
+
+        .bg-greenearth{background:url(green-earth-spinning.gif);
+        background-attachment: fixed;
+        background-size:100px auto;}
+        .bg-sadalien{background:url(sad-alien.gif);
+        background-attachment: fixed;
+        background-size: cover;}
+        .bg-gray{
+          padding: 20px 0;
+          background: #303030;
+        padding: 100px 0;
+        margin: 100px 0;
+        position: relative;
+        width: 100%;}
+        .bg-bacteria{background:url(bacteria.gif);
+        background-attachment: fixed;
+        background-size: cover;}
+        .bg-design1{background:url(design1.gif);
+        background-attachment: fixed;
+        background-size: cover;}
+        .bg-design2{background:url(design2.gif);
+        background-attachment: fixed;
+        background-size: cover;}
+        .bg-design3{background:url(design3.gif);
+        background-attachment: fixed;
+        background-size: cover;}
+        .bg-0101{background:url(0101.gif);
+        background-attachment: fixed;
+        background-size:100px auto;}
+
+      .big-circle {position: absolute;
+      top: 360px;
+      left: -640px;
+      width: 800px;
+      height: 800px;
+      border: 2px solid #00ff88;
+      border-radius: 50%;
+      z-index: 0;}
+      .interview {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            background-color: #222;
+            border-radius: 40px;
+            padding: 30px 40px;
+            margin: 70px 0;
+            width: 920px;
+            transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);}
+    .interview:hover {
+      transform: scale(1.05);
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);}
+    .interview-img-circle {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100px;
+            height: 100px;
+            background: #00ff88;
+            border-radius: 50%;
+            z-index: 0;}
+    .interview img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 30px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1; }
+    .text-box2{flex: 1;}
+    .interview-offset {
+      margin-left: 50px;}
+    
+            .divider {width: 45%;
+            height: 2px;
+            background-color: white;
+            margin: 79px 0 50px 0;}
+
+.product-section {text-align: center;}
+.guide-text {color: #aaa; margin-bottom: 50px;}
+.product-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 30px;}
+.product-card {
+  width: 230px;
+  height: 350px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(0,0,0,0);}
+.product-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  filter: brightness(1.2);
+  box-shadow: 0 10px 20px rgba(0, 255, 136, 0.6);}
+.product-name {
+  position: absolute;
+  bottom: 20px;
+  left: 0;right: 0;
+  text-shadow: 0 0 5px black;}
+
+
+
+
+.title-wrap {position: relative;
+margin-bottom: 50px;}
+.small-top-text {position: absolute;
+  top: -40px;
+  right: 5px;}
+.left-area {max-width: 500px;}
+.sub-title {margin: 50px 0 30px 0;}
+.description {margin-bottom: 80px;}
+.icon-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 60px;}
+.icon {width: 100px;
+  height: 100px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;}
+.logo-img {width: 50px;}
+
+
+
+.big-circle2{position: absolute;
+  top: -30px;
+  left: -450px;
+  width: 800px;
+  height: 800px;
+  border: 2px solid #00ff88;
+  border-radius: 50%;
+  z-index: 0;}
+  .inner-circle {position: absolute;
+  top: -10px; 
+  left: -430px; 
+  width: 760px;
+  height: 760px;
+  opacity: 0.2;
+  border-radius: 50%;
+  z-index: 0;
+  background: #00ff88;}
+.section-title {text-align: right;
+  margin-bottom: 50px;
+  line-height: 1.4;}
+  .section-title2 {text-align: left;
+  margin-bottom: 50px;
+  line-height: 1.4;}
+.feature {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.text-block2{ 
+  position: relative;
+  z-index: 101;
+  margin: 300px 50px 400px 260px}
+
+  .text-block3{ 
+  position: relative;
+  z-index: 1;
+  margin: 300px 280px 400px 0px;}
+
+.feature-offset {margin-left: 40px;}
+.feature-icon {
+  width: 100px; 
+  height: 100px;
+  background-color: #00ff88;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  position: relative;
+  z-index: 1;
+}
+.feature-icon img {width: 50px; height: 50px;}
+.feature-text {
+  position: relative;
+  z-index: 1;
+}
+.feature-text h3 {margin-bottom: 8px;}
+.feature-text p {line-height: 1.5;}
+
+.big-circle3{position: absolute;
+  top: 0px;
+  left: 620px;
+  width: 800px;
+  height: 800px;
+  border: 2px solid #00ff88;
+  border-radius: 50%;
+  z-index: 0;
+  transform: translateZ(0);}
+.inner-circle2 {position: absolute;
+  top: 18px; 
+  left: 643px; 
+  width: 760px;
+  height: 760px;
+  opacity: 0.2;
+  border-radius: 50%;
+  z-index: 0;
+  background: #00ff88;
+  transform: translateZ(0);}
+
+
+
+/* --- 미생물 인식 조정 공법 섹션 --- */
+.microbe-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 180px 0 120px 0;
+  gap: 220px;}
+.microbe-left {flex: 1;
+  padding-left: 40px;
+  min-width: 420px;}
+.microbe-title {margin-bottom: 18px; margin-top: 100px;}
+.microbe-sub {margin-bottom: 40px;}
+.microbe-desc {margin-bottom: 60px;}
+.microbe-line {position: relative;
+  margin-top: 80px;
+  margin-left: 0;
+  width: 300px;
+  height: 120px;}
+.microbe-line svg {position: absolute;
+  left: 170px; top: 10px;}
+.microbe-line-label {position: absolute;
+  right: -158px;
+  top: 25px;}
+.microbe-right {flex: 1;
+  min-width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;}
+.microbe-steps {background: none;
+  border: 1.5px solid #ffffff;
+  border-radius: 8px;
+  padding: 40px 30px 40px 30px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin: 100px 0;}
+.microbe-step {display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+  margin-bottom: 0; padding-bottom: 10px ;padding-left: 40px ;padding-top: 20px;
+  position: relative;
+  width: 100%;}
+.microbe-step-icon {width: 54px;
+  height: 54px;
+  margin-bottom: 18px;}
+.microbe-step-label {text-align: left; margin-bottom: 0;}
+.microbe-arrow {width: 30px;
+  height: 30px;
+  margin: 0 0 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;}
+  .bacteria-description {
+    position: absolute;
+    top: 420px;
+    left: -100px;
+    width: 300px;
+    height: auto;
+    animation: floating 2s ease-in-out infinite;
+  }
+
+@keyframes floating {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-40px); }
+  100% { transform: translateY(0px); }
+}
+
+.review-section {position: relative;
+  width: 100%;
+  height: 700px;
+  margin-bottom: 120px;}
+.speech-bubble-green,
+.speech-bubble-white {opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);}
+.speech-bubble-visible {opacity: 1;
+  transform: translateY(0);}
+.speech-bubble-green {position: absolute;
+  background: #1a693b;
+  color: #fff;
+  border-radius: 30px;
+  padding: 15px;
+  font-size: 1.1rem;
+  font-family: 'Freesentation-4Regular', sans-serif;
+  min-width: 180px;
+  text-align: center;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  z-index: 2;}
+.speech-bubble-white {position: absolute;
+  background: #fff;
+  color: #1a693b;
+  border: 3px solid #0e8038;
+  border-radius: 30px;
+  padding: 20px 25px;
+  font-size: 1.1rem;
+  font-family: 'Freesentation-4Regular', sans-serif;
+  min-width: 180px;
+  text-align: center;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);}
+.speech-bubble-green:hover,
+.speech-bubble-white:hover {
+  transform: translateY(0) scale(1.06);
+  transition: transform 0.3s cubic-bezier(.4,0,.2,1), opacity 0.7s cubic-bezier(.4,0,.2,1);
+  z-index: 2;}
+  .cartoon-img{position: absolute;
+  top: 50px;
+  left: 215px;
+  width: 600px;
+  height: auto;
+  z-index: 0;}
+
+
+
+.recommend-section {
+  margin: 180px 0 300px 0;
+  width: 100%;
+  text-align: center;
+  padding: 100px 0;
+}
+.recommend-list {margin: 60px 420px;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;}
+.recommend-item {display: flex;
+  align-items: center;
+  background: #222;
+  border-radius: 48px;
+  padding: 20px;
+  font-size: 1.2rem; font-family: 'Freesentation-4Regular', sans-serif;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  text-align: left;
+  gap: 6px;
+  transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1);}
+.recommend-item.recommend-visible {
+  opacity: 1;
+  transform: translateY(0);}
+.recommend-check {width: 48px;
+  height: 48px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 18px;}
+.recommend-check svg {width: 28px;
+  height: 28px;
+  stroke: #1a693b;
+  stroke-width: 4;
+  fill: none;}
+
+.scroll-fade {opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);}
+.scroll-fade.visible {opacity: 1;
+  transform: translateY(0);}
+
+.chat-container {max-width: 800px;
+  margin: 100px auto;
+  padding: 40px 20px;}
+.chat-message {display: flex;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;}
+.chat-message.scroll-fade.visible {opacity: 1;
+  transform: translateY(0);}
+.chat-icon { width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 16px;
+  flex-shrink: 0;}
+.chat-icon img {width: 100%;
+  height: 100%;
+  object-fit: cover;}
+.chat-bubble {background: #222;
+  padding: 20px;
+  max-width: 600px;
+  position: relative;}
+
+.chat-message:not([style*="row-reverse"]) .chat-bubble {
+  border-radius: 0 20px 20px 20px;
+}
+
+.chat-message[style*="row-reverse"] .chat-bubble {
+  border-radius: 20px 0 20px 20px;
+}
+
+.chat-bubble.response {background: #2d4a2e;}
+
+.chat-bubble p {margin: 0;
+  line-height: 1.5;}
+.chat-bubble p + p {margin-top: 12px;}
+.chat-bubble .explanation {
+  color: #00ff88;
+  font-size: 0.9em;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.1);}
+
+
+
+
+.review-box {background: #222;
+    border-radius: 24px;
+    padding: 32px;
+    margin-bottom: 24px;
+    transition: transform 0.3s ease;}
+
+  .review-box:hover {transform: translateY(-5px);}
+
+  .review-header {display: flex;
+    align-items: center;
+    margin-bottom: 20px;}
+
+  .reviewer-avatar {width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #333;
+    margin-right: 16px;}
+
+  .reviewer-info {flex: 1;}
+
+  .reviewer-name {font-size: 1.1rem;
+    margin-bottom: 4px;}
+
+  .star-rating {color: #FFD700;}
+
+  .review-content { display: flex; gap: 24px;}
+
+  .review-image {width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    filter: brightness(0.8) sepia(0.3) hue-rotate(60deg);}
+
+  .review-text {flex: 1;
+    line-height: 1.6;}
+
+  .review-highlight {color: #00ff88;
+    margin-top: 12px;
+    display: block;}
+
+  .reviews-container { display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 48px;}
+
+  .reviews-section {background: black;
+    padding: 100px 0;}
+
+  .reviews-container { max-width: 800px;
+    margin: 48px auto 0;}
+
+  .review-box {background: #1a1a1a;
+    border-radius: 32px;
+    padding: 40px;
+    margin-bottom: 24px;
+    transition: transform 0.3s ease;}
+
+  .review-box:hover {transform: translateY(-5px);}
+
+  .review-header {display: flex;
+    align-items: center;
+    margin-bottom: 32px;}
+
+  .reviewer-avatar {width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #333;
+    margin-right: 16px;}
+
+  .reviewer-info {flex: 1;}
+
+  .reviewer-name {font-size: 1.1rem;
+    margin-bottom: 8px;
+    opacity: 0.9;}
+
+  .star-rating {color: #FFD700;
+    font-size: 1.2rem;
+    letter-spacing: 2px;}
+
+  .review-content {display: flex;
+    gap: 32px;
+    align-items: flex-start;}
+
+  .review-image {width: 240px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 12px;
+    filter: brightness(0.8) sepia(0.3) hue-rotate(60deg);
+    flex-shrink: 0;}
+
+  .review-text {flex: 1;
+    line-height: 1.8;
+    opacity: 0.9;}
+
+  .review-highlight {color: #00ff88;
+    margin-top: 16px;
+    display: block;
+    line-height: 1.6;}
+
+  .qa-section {background: black;
+    padding: 100px 0;}
+
+  .qa-container {max-width: 800px;
+    margin: 48px auto 0;}
+
+  .qa-item {margin-bottom: 24px;}
+
+  .qa-question { display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    cursor: pointer;
+    padding: 24px;
+    background: #1a1a1a;
+    border-radius: 24px;
+    transition: all 0.3s ease;}
+
+  .qa-question:hover {background: #222;}
+
+  .qa-icon {width: 48px;
+    height: 48px;
+    background: #00ff88;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Zen Dots", sans-serif;
+    font-size: 1.5rem;
+    color: black;
+    flex-shrink: 0;}
+
+  .qa-text {flex: 1;
+    padding-top: 8px;}
+
+  .qa-arrow {width: 24px;
+    height: 24px;
+    position: relative;
+    margin-top: 8px;}
+
+  .qa-arrow::before,
+  .qa-arrow::after {content: '';
+    position: absolute;
+    background: #00ff88;
+    height: 2px;
+    width: 12px;
+    transition: transform 0.3s ease;}
+
+  .qa-arrow::before {transform: rotate(45deg);
+    left: 0;}
+
+  .qa-arrow::after {transform: rotate(-45deg);
+    right: 0;}
+
+  .qa-answer {display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-top: 16px;
+    padding: 0 24px 0 96px;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    opacity: 0;}
+
+  .qa-item.active .qa-answer {max-height: 300px;
+    opacity: 1;
+    padding-bottom: 24px;}
+
+  .qa-item.active .qa-arrow::before {transform: rotate(-45deg);}
+  .qa-item.active .qa-arrow::after {transform: rotate(45deg);}
+
+  @keyframes upDown {0%   { transform: translateY(0); }
+      50%  { transform: translateY(-10px); }
+      100% { transform: translateY(0); }}
+
+    /* 스프레드 이미지 애니메이션 */
+    .spread-img {
+      position: absolute;
+      left: -100px;  
+      transform: translate(-50%, -50%);
+      width: 450px;
+      height: auto;
+      opacity: 0;
+      transform: translateX(100px);
+      transition: all 1s ease-out;}
+    .spread-img.show {
+      opacity: 1;
+      left: -100px;  }
+    .spread-delay1 { transition-delay: 0s; }
+    .spread-delay2 { transition-delay: 0.5s; }
+    .spread-delay3 { transition-delay: 1s; }
+    .spread-delay4 { transition-delay: 1.5s; }
+
+    .section-container {position: relative;}
+
+    .big-circle3{
+      position: absolute;
+      top: 0px;
+      left: 620px;
+      width: 800px;
+      height: 800px;
+      border: 2px solid #00ff88;
+      border-radius: 50%;
+      z-index: 0;
+      transform: translateZ(0);}
+
+    .inner-circle2 {position: absolute;
+      top: 18px; 
+      left: 643px; 
+      width: 760px;
+      height: 760px;
+      opacity: 0.2;
+      border-radius: 50%;
+      z-index: 0;
+      background: #00ff88;
+      transform: translateZ(0);}
+
+    .model-container {position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 2000;}
+
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body, 
+    button, 
+    a, 
+    .recommend-check,
+    .qa-arrow,
+    .chat-icon,
+    .reviewer-avatar,
+    .chat-bubble,
+    .review-box,
+    .qa-item,
+    .model-viewer,
+    input,
+    select,
+    textarea,
+    .product-card,
+    .product-card * {
+      cursor: url('cursor.png') 25 25, auto !important;}
+
+    button:hover, 
+    a:hover, 
+    .recommend-check:hover,
+    .qa-arrow:hover,
+    .chat-icon:hover,
+    .reviewer-avatar:hover,
+    .product-card:hover {opacity: 0.8; }
+    
+    </style>
+</head>
+
+    <body>
+
+      <div class="planet-wrapper">
+        <img src="green-earth.png" class="img-greenearth" />
+
+        <nav class="nav-background">
+            <div class="wrap flex">
+            <div class="logo">
+              <h1 class="zen-dots text-white">GALAXY MALL</h1>
+            </div>
+            <div class="menu">
+                <ul class="flex">
+                <li><a class="encode-sans-condensed" href="#about">about</a></li>
+                <li><a class="encode-sans-condensed" href="#sales">sales</a></li>
+                <li><a class="encode-sans-condensed" href="#review">review</a></li>
+                <li><a class="encode-sans-condensed" href="#Q&A">Q&A</a></li>
+                </ul>
+            </div>
+        </div>
+        </nav>
+
+        <header class="bg-header">
+          <div class="wrap">
+            <h1 class="freesentation-semibold text-two">외계인을 위한 지구인 흉내 키트</h1>
+            <h1 class="zen-dots text-logo">
+              HUMAN <br />
+              MIMIC KIT :<br />
+              FOR ALIENS
+            </h1>
+            <p class="encode-sans-condensed text-tiny">
+              Disguise yourself. Blend into Kepharion-A Blue.<br />
+              Master human speech, habits, and emotions.<br />
+              No one will know you're not one of them.<br />
+              The Human Mimic Kit — conquer from within.
+            </p>
+
+            <div class="encode-sans-condensed little-little text-one text-gray">
+              space<br />
+              Earthling Imitation Kit:<br />
+              Alien Edition
+            </div>
+
+            <div id="about" class="encode-sans-condensed little-little2 text-white">
+              Infiltration Kit: Become a Perfect Human Being – For Intergalactic Aliens Agents Only
+            </div>
+          </div>
+        </header>
+      </div>
+
+      
+
+      <section>
+        <div class="flex-container">
+          <!-- 이미지 영역 -->
+          <div class="news-imgs-row">
+            <img src="news1.png" class="news-img left-delay1" />
+            <img src="news2.png" class="news-img left-delay2" />
+            <img src="news3.png" class="news-img left-delay3" />
+          </div>
+      
+          <!-- 텍스트 영역 -->
+          <div class="text-box text-white">
+            <h2 class="freesentation-semibold text-twodotfive">타행성 잠입 실습 세대</h2>
+            <p class="freesentation-extralight text-onedottwo">
+              34232년, 은하계 최상위권 대학원에서 <span class="text-green">타행성 문화 실습</span>은 거의 반필수가 되었습니다...
+            </p>
+            <p class="freesentation-extralight text-onedottwo">
+              학생들은 다양한 지적 생명체가 거주하는 행성에 잠입하여, <span class="text-green">원주민인 척 연기하면서</span> 사회 구조를 직접 체험하고 분석해야 합니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+              }
+            });
+          }, { threshold: 0.1 });
+
+          document.querySelectorAll('.news-img').forEach(img => {
+            observer.observe(img);
+          });
+        });
+      </script>
+
+      <section class="bg-greenearth">
+        <div class="wrap">
+                <p class="freesentation-regular text-onedotfive text-white center-spacing">그중에서도 <span class="text-green">지구</span>는 가장 난이도 높고,<br> 
+                동시에 가장 인기있는 실습지로 손꼽힙니다.</p>
+        </div>
+      </section>
+
+      <div class="wrap">
+        <img src="arrow.png" style="position: absolute; top: -30px; left: 500px; transform: translate(-50%, -50%); width: 40px; height: auto; animation: upDown 1s ease-in-out infinite;">
+      </div>
+
+      <section>
+        <div class="wrap">
+            <p class="freesentation-regular text-onedotfive text-white center-spacing2">그렇지만 인간으로 위장하는 일은<br> 
+                결코 쉬운 일이 아닙니다...</p>
+
+                <div class="big-circle"></div>
+              
+                <div class="interview">
+                  <div class="interview-img-circle"></div>
+                  <img src="interview-1.png" alt="에뻬릭뽀라스">
+                  <div class="text-box2">
+                    <div class="freesentation-light text-onedotfive text-white name">에뻬릭뽀라스 <span class="text-gray text-tiny">(2391, 꿈프론트 행성 거주)</span></div>
+                    <div class="freesentation-extralight text-onedottwo text-white quote">
+                      <span class="text-green">"시간약속을 4시간 정도 늦었다고 지구인들이 어찌나 짜증내던지!</span><br> 그들의 시간감각은 우리같은 외계인들에겐 너무 어려워요.”
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="interview interview-offset">
+                  <div class="interview-img-circle"></div>
+                  <img src="interview-2.png" alt="꿀레모오꽈르미용">
+                  <div class="text-box2">
+                    <div class="freesentation-light text-onedotfive text-white name">꿀레모으꽈르미옹 <span class="text-gray text-tiny">(10271, 베텔게우스 행성 거주)</span></div>
+                    <div class="freesentation-extralight text-onedottwo text-white quote">
+                      "저는 지구인들이 음식을 먹으면서 <span class="text-green">저와는 다른 감각을 느끼고 있는줄 몰랐어요.</span> 저에게는 미각을 
+                        느낄 수 있는 수용체 돌기들이 없는데, 어떻게 지구의 식문화에 관련된 졸업논문을 쓰죠?”
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="interview">
+                  <div class="interview-img-circle"></div>
+                  <img src="interview-3.png" alt="껨뽀커">
+                  <div class="text-box2">
+                    <div class="freesentation-light text-onedotfive text-white name">겜뽀꺼 <span class="text-gray text-tiny">(985, BPM 37023 항성 거주)</span></div>
+                    <div class="freesentation-extralight text-onedottwo text-white quote">
+                      <span class="text-green">"인간들의 줄임말과 은어들은 이해하기 너무 어려워요.</span><br> 저는 "아싸"라는 단어가 그냥 말 뒤에 붙이는 추임새인 줄로만 알았다고요.”
+                    </div>
+                  </div>
+                </div>
+        </div>
+      </section>
+
+      <section class="bg-sadalien">
+        <div class="wrap">
+                <p class="freesentation-regular text-onedotfive text-white center-spacing">많은 외계인들은<br> 
+                    인간의 생활 습성을 이해하는 데에 실패하고<br> 
+                    <span class="text-green">다년간의 잠입 실기생활</span>을 이어나가곤 합니다.</p>
+        </div>
+      </section>
+
+      <section>
+<div class="wrap">
+  <img src="box1-1.png" class="kitbox-img1 scroll-fade left-delay1"> 
+  <img src="box1-2.png" class="kitbox-img2 scroll-fade left-delay2">
+  <img src="box1-3.png" class="kitbox-img3 scroll-fade left-delay3">
+</div>
+        <div class="flex">
+                <div class="wrap2">
+                    <div class="right-spacing2">
+                        <h2 class="freesentation-semibold text-twodotfive text-white scroll-fade">어렵고 힘든<br>지구인 위장.</h2>
+                        <p class="freesentation-extralight text-onedottwo text-white scroll-fade">갤럭시 몰은 외계인분들이 가장 고충을 겪는 부분들을 해결해주기 위해 나섰습니다.</p>
+                    </div>
+                    <div class="divider"></div>
+                    <div>
+                        <h2 class="left-spacing2 freesentation-semibold text-twodotfive text-white scroll-fade">이젠 더 이상<br>혼자 하지 마세요.</h2>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+
+  <section>
+      <div class="wrap right-spacing">
+          <h2 class="freesentation-semibold text-twodotfive text-white scroll-fade">지구인 흉내 키트</h2>
+          <p class="freesentation-extralight text-onedottwo text-white scroll-fade"><span class="text-green">총 4개의 구성품</span>으로 이루어진 지구인 흉내 키트는 외계 잠입 전문가들의 노하우가 담겨 있습니다.</p>
+          <p class="freesentation-extralight text-onedottwo text-white scroll-fade">잠입 요원이 된 기분을 느껴보세요.</p>
+      </div>
+      <div class="wrap">
+        <img src="box2.png" class="box2-img scroll-fade">
+        <img src="pill-img.png" class="object1-img scroll-fade">
+        <img src="earaid-img.png" class="object2-img scroll-fade">
+        <img src="denture-img.png" class="object3-img scroll-fade">
+      </div>
+  </section>
+
+  <div class="wrap">
+    <img src="arrow.png"  id="sales" style="position: absolute; top: -200px; left: 500px; transform: translate(-50%, -50%); width: 40px; height: auto; animation: upDown 1s ease-in-out infinite;">
+  </div>
+
+  <section class="product-section">
+      <p class="guide-text freesentation-regular">클릭하면 상품의 상세 정보를 바로 볼 수 있습니다</p>
+    
+      <div class="product-wrap">
+        <div class="product-card" style="background-image: url('product1.png');" onclick="location.href='#pills'">
+          <div class="product-name text-white text-onedottwo freesentation-regular">차원 동기화 알약</div>
+        </div>
+        <div class="product-card" style="background-image: url('product2.png');" onclick="location.href='#denture'">
+          <div class="product-name text-white text-onedottwo freesentation-regular">미각 치환 틀니</div>
+        </div>
+        <div class="product-card" style="background-image: url('product3.png');" onclick="location.href='#earaid'">
+          <div class="product-name text-white text-onedottwo freesentation-regular"">농담 해석 보청기</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <img src="arrow.png" id="pills" style="position: absolute; top: -200px; left: 500px; transform: translate(-50%, -50%); width: 40px; height: auto; animation: upDown 1s ease-in-out infinite;">
+    </div>
+
+  <section class="bg-gray">
+    <div class="wrap">
+      <div class="title-wrap">
+        <p class="small-top-text encode-sans-condensed text-gray">Infiltration Kit: Become a Perfect Human Being For Intergalactic Aliens Agents Only : 01</p>
+        <h1 class="big-title text-white zen-dots text-logo2">Dimensional - Sync - Pill</h1>
+        <div class="flex" style="position: relative;">
+          <div class="left-area">
+            <h2 class="sub-title freesentation-semibold text-twodotfive text-green scroll-fade">차원 동기화 알약</h2>
+            <p class="description text-white text-onedottwo freesentation-regular scroll-fade">당신의 고차원적인 <br> 4차원 인식 능력을<br> 부작용 없이 다운그레이드.</p>
+      
+            <div class="icon-row">
+              <div class="icon">
+                <div class="text-black text-onedotthree zen-dots">99.9%</div>
+                <div class="text-black text-onedottwo freesentation-semibold">암흑 물질</div>
+              </div>
+              <div class="icon">
+                <img src="triangle-logo.png" class="logo-img">
+              </div>
+            </div>
+          </div>
+
+          <model-viewer 
+            id="pillsModel"
+            src="pills.glb" 
+            camera-controls="false"
+            auto-rotate 
+            rotation-per-second="30deg"
+            interaction-prompt="none"
+            camera-orbit="0deg 75deg 150%"
+            exposure="1"
+            shadow-intensity="1"
+            touch-action="pan-y" 
+            style="width: 600px; height: 600px; position: fixed; right: 200px; opacity: 0; filter: hue-rotate(90deg) brightness(1.2) saturate(150%); z-index: 100; pointer-events: none; transition: opacity 0.5s ease-out, top 0.3s ease-out, transform 0.3s ease-out;"
+            ar>
+          </model-viewer>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <div class="wrap">
+      <div class="section-container">
+        
+        <!-- 큰 원 -->
+        <div class="big-circle2"></div>
+        <div class="inner-circle"></div>
+    
+        <!-- 오른쪽 텍스트 블럭 -->
+        <div class="text-block2">
+          <h2 class="section-title sub-title freesentation-semibold text-twodotfive text-white scroll-fade">1등 인지 조정 의약품<br><span class="text-green">차원 동기화 알약의 특징</span></h2>
+    
+          <div class="feature">
+            <div class="feature-icon">
+              <img src="icon-1.png" alt="시간 인식 보정">
+            </div>
+            <div class="feature-text">
+              <h3 class="freesentation-regular text-onedotfive text-green name">시간 인식 보정</h3>
+              <p class="freesentation-extralight text-onedottwo text-white quote">4차원에서 3차원으로 인식 보정.<br>과거, 현재, 미래만 인식할 수 있도록 도움</p>
+            </div>
+          </div>
+    
+          <div class="feature feature-offset" style="margin-right: 50px;">
+            <div class="feature-icon">
+              <img src="icon-2.png" alt="시간 겹침 현상 방지">
+            </div>
+            <div class="feature-text" style="margin-right: 24px;">
+              <h3 class="freesentation-regular text-onedotfive text-green name">시간 겹침 현상 방지</h3>
+              <p class="freesentation-extralight text-onedottwo text-white quote">"방금 일어난 일"과 "곧 일어날 일"이 
+                <br>겹쳐 보이는 현상 차단</p>
+            </div>
+          </div>
+    
+          <div class="feature">
+            <div class="feature-icon">
+              <img src="icon-3.png" alt="공간 방향 감각 통일">
+            </div>
+            <div class="feature-text">
+              <h3 class="freesentation-regular text-onedotfive text-green name">공간 방향 감각 통일</h3>
+              <p class="freesentation-extralight text-onedottwo text-white quote">벽을 통과하거나 위로 걷는 혼동 방지</p>
+            </div>
+          </div>
+    
+        </div>
+    
+      </div>
+    </div>
+    
+
+    
+    <section class="bg-bacteria">
+      <div class="wrap">
+      <img src="bacteria-description.png" class="bacteria-description">
+      <div class="microbe-section">
+        <div class="microbe-left">
+          <div class="microbe-title freesentation-semibold text-twodotfive text-white scroll-fade">
+            은하 미생물을 이용한<br>
+            <span class="text-green">안전한 인식 조정 공법</span>
+          </div>
+          <div class="microbe-sub freesentation-light text-one guide-text scroll-fade">(평균 분자량 1,000Da)</div>
+          <div class="microbe-desc freesentation-extralight text-onedottwo text-white scroll-fade">
+            차원 인식 억제 성분이 <br>신경세포 간의
+            상호 연결을 <br>'지구식 인과 방식'에 맞춰 리셋합니다.
+          </div>
+          <div class="microbe-line">
+            <svg width="300" height="120">
+              <polyline points="0,120 90,0 300,0" style="fill:none;stroke:#fff;stroke-width:1.5" />
+            </svg>
+            <div class="microbe-line-label freesentation-extralight text-one text-white">효소가수분해<br>공법 적용</div>
+          </div>
+        </div>
+        <div class="microbe-right">
+          <div class="microbe-steps">
+            <div class="microbe-step">
+              <img src="icon-microbe1.png" class="microbe-step-icon" alt="미생물 아이콘">
+              <div class="microbe-step-label freesentation-extralight text-onedottwo text-white">은하 미생물의<br>수정체 추출</div>
+            </div>
+            <div class="microbe-arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <polyline points="6,10 12,16 18,10" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="microbe-step">
+              <img src="icon-microbe2.png" class="microbe-step-icon" alt="분자 아이콘">
+              <div class="microbe-step-label freesentation-extralight text-onedottwo text-white">차원 인식 억제<br>성분으로 전환</div>
+            </div>
+            <div class="microbe-arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <polyline points="6,10 12,16 18,10" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="microbe-step">
+              <img src="icon-microbe3.png" class="microbe-step-icon">
+              <div class="microbe-step-label freesentation-extralight text-onedottwo text-white">뉴런 연결 방식을<br>지구인과 닮게</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    
+  </section>
+
+  <section class="review-section">
+    <div class="center-spacing3" style="top: 30px; position: relative;">
+      <div class="freesentation-light text-onedotthree text-gray" style="margin-bottom: 10px;">실제 사용 고객 후기</div>
+      <div class="freesentation-semibold text-twodotfive text-green">올랑울리 행성의 퐝허 씨</div>
+    </div>
+
+    <div class="wrap">
+    <img src="cartoon1.png" class="cartoon-img">
+    </div>
+
+    <div class="speech-bubble-green" style="top: 120px; left: 530px; font-weight: bold; min-width: 120px;">BEFORE</div>
+    <div class="speech-bubble-green" style="top: 410px; left: 530px; font-weight: bold; min-width: 120px;">AFTER</div>
+    <div class="speech-bubble-white" style="top: 290px; left: 393px;">
+      차원 적응 실패로<br>거래현장에<br>늦은 퐝허 씨
+    </div>
+    <div class="speech-bubble-white" style="top: 290px; right: 370px;">
+      과도한 지각을<br>이유로 해고당한<br>퐝허 씨
+    </div>
+    <div class="speech-bubble-white" style="top: 560px; left: 369px;">
+      알약을 복용하고<br>차원 적응에 성공하여<br>시간을 맞춘 퐝허 씨
+    </div>
+    <div class="speech-bubble-white" style="top: 570px; right: 370px;">
+      지구인 상사에게<br>좋은 인상을 남긴<br>퐝허 씨
+    </div>
+  </section>
+    
+  <section class="recommend-section bg-design1">
+    <div class="center-spacing3" style="margin-bottom: 40px;">
+      <div class="freesentation-light text-onedotthree text-white" style="margin-bottom: 10px;">RECOMMENDED FOR</div>
+      <div class="freesentation-semibold text-twodotfive text-green">이런 분들에게 추천합니다</div>
+    </div>
+    <div class="recommend-list text-white">
+      <div class="recommend-item">
+        <span class="recommend-check">
+          <svg viewBox="0 0 24 24"><polyline points="5,13 10,18 19,7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        인간과의<span class="text-green">실시간 즉각 상호작용</span>이 중요한 활동을 하고 있는 외계인
+      </div>
+      <div class="recommend-item">
+        <span class="recommend-check">
+          <svg viewBox="0 0 24 24"><polyline points="5,13 10,18 19,7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        지구인의 시선을 통해<span class="text-green">지구여행</span>을 보다 더욱 생생하게 느끼고 싶은 외계인
+      </div>
+      <div class="recommend-item">
+        <span class="recommend-check">
+          <svg viewBox="0 0 24 24"><polyline points="5,13 10,18 19,7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="text-green">지구 시간 기준 수업</span>이나<span class="text-green">회의</span>를 참석해야 하는 외계인
+      </div>
+      <div class="recommend-item">
+        <span class="recommend-check">
+          <svg viewBox="0 0 24 24"><polyline points="5,13 10,18 19,7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        공간과 공간 틈새에<span class="text-green">자꾸 끼는</span>외계인
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <img src="arrow.png" id="denture" style="position: absolute; top: -150px; left: 500px; transform: translate(-50%, -50%); width: 40px; height: auto; animation: upDown 1s ease-in-out infinite;">
+  </div>
+
+  <section class="bg-gray">
+    <div class="wrap" style="transform: scaleX(-1);">
+      <div class="title-wrap" style="transform: scaleX(-1); text-align: right;">
+        <p class="small-top-text encode-sans-condensed text-gray" style="text-align: right;">Infiltration Kit: Become a Perfect Human Being For Intergalactic Aliens Agents Only : 02</p>
+        <h1 class="big-title text-white zen-dots text-logo2" style="text-align: right;">Flavor - Mod Dentures</h1>
+    
+        <div class="flex" style="flex-direction: row-reverse;">
+            <div class="left-area" style="text-align: right;">
+              <h2 class="sub-title freesentation-semibold text-twodotfive text-green scroll-fade">미각 치환 틀니</h2>
+              <p class="description text-white text-onedottwo freesentation-regular scroll-fade">인간이 느끼는 미각을<br>우리같은 고등 생명체가<br>
+                  느끼지 못하면 안 되니까.</p>
+        
+              <div class="icon-row" style="justify-content: flex-end;">
+                <div class="icon">
+                  <div class="text-black text-onedotthree zen-dots">97.8%</div>
+                  <div class="text-black text-onedottwo freesentation-semibold">치환 정확도</div>
+                </div>
+                <div class="icon">
+                  <img src="triangle-logo.png" class="logo-img">
+                </div>
+              </div>
+            </div>
+            <div class="right-spacing">
+            </div>
+
+            <div class="model-container">
+              <model-viewer 
+                id="dentureModel"
+                src="denture.glb" 
+                camera-controls="false"
+                auto-rotate 
+                rotation-per-second="30deg"
+                interaction-prompt="none"
+                camera-orbit="0deg 75deg 150%"
+                exposure="1"
+                shadow-intensity="1"
+                touch-action="pan-y" 
+                style="width: 600px; height: 600px; position: absolute; left: -150px; top: 50px; filter: hue-rotate(90deg) brightness(1.2) saturate(150%); pointer-events: none; transform: scaleX(-1) translateZ(0); opacity: 0; transition: opacity 0.5s ease-out, top 0.3s ease-out, left 0.3s ease-out;"
+                ar>
+              </model-viewer>
+            </div>
+
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+    <div class="wrap" style="transform: scaleX(-1);">
+      <div class="section-container" style="transform: scaleX(-1);">
+        
+        <!-- 큰 원 -->
+        <div class="big-circle3"></div>
+        <div class="inner-circle2"></div>
+    
+        <!-- 오른쪽 텍스트 블럭 -->
+        <div class="text-block3" style="text-align: right;">
+          <h2 class="section-title2 sub-title freesentation-semibold text-twodotfive text-white scroll-fade">감각 체험 기기의 혁신<br><span class="text-green">미각 치환 틀니의 특징</span></h2>
+    
+          <div class="feature" style="flex-direction: row-reverse;">
+            <div class="feature-icon">
+              <img src="icon-4.png" alt="시간 인식 보정">
+            </div>
+            <div class="feature-text" style="text-align: right; margin-right: 24px;">
+              <h3 class="freesentation-regular text-onedotfive text-green name">음식 분석 마이크로 센서</h3>
+              <p class="freesentation-extralight text-onedottwo text-white quote">맛의 감각을 우리가 느낄 수 있는 감각으로<br>치환해주는 센서가 부착된 틀니</p>
+            </div>
+          </div>
+    
+          <div class="feature feature-offset" style="flex-direction: row-reverse; margin-right: 50px;">
+            <div class="feature-icon">
+              <img src="icon-5.png">
+            </div>
+            <div class="feature-text" style="text-align: right; margin-right: 24px;">
+              <h3 class="freesentation-regular text-onedotfive text-green name">8가지의 맛 치환</h3>
+              <p class="freesentation-extralight text-onedottwo text-white quote">단맛, 신맛, 쓴맛, 짠맛, 감칠맛, 지방맛,<br> 감칠맛, 매운맛, 떫은맛 치환 가능 </p>
+            </div>
+          </div>
+    
+          <div class="feature" style="flex-direction: row-reverse;">
+            <div class="feature-icon">
+              <img src="icon-6.png" alt="공간 방향 감각 통일">
+            </div>
+            <div class="feature-text" style="text-align: right; margin-right: 24px;">
+              <h3 class="freesentation-regular text-onedotfive text-green name">온도 연동 피드백</h3>
+              <p class="freesentation-extralight text-onedottwo text-white quote">음식의 온도에 따라 느껴지는 맛의 차이 해석</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+    
+  <div class="wrap">
+
+    <img src="spread1.png" class="spread-img spread-delay1 scroll-fade" style="top: 200px;">
+    <img src="spread2.png" class="spread-img spread-delay2 scroll-fade" style="top: 400px;">
+    <img src="spread3.png" class="spread-img spread-delay3 scroll-fade" style="top: 600px;">
+    <img src="spread4.png" class="spread-img spread-delay4 scroll-fade" style="top: 800px;">
+
+    <div class="section-container">
+      <h2 class="section-title sub-title freesentation-semibold text-twodotfive text-white scroll-fade">마이크로 센서를 이용한<br><span class="text-green">틀니의 감각 치환 원리</span></h2>
+
+      <div class="timeline-container" style="position: relative; margin-left: 400px; margin-top: 80px;">
+        <!-- Vertical line -->
+        <div style="position: absolute; left: 0; top: 0; width: 2px; height: 100%; background-color: white; opacity: 0.3;"></div>
+
+        <!-- Timeline items -->
+        <div class="timeline-item" style="position: relative; margin-bottom: 100px; padding-left: 60px;">
+          <div style="position: absolute; left: -4px; top: 10px; width: 10px; height: 10px; background-color: white; border-radius: 50%;"></div>
+          <h3 class="freesentation-regular text-onedotfive text-green">음식 섭취</h3>
+          <p class="freesentation-extralight text-onedottwo text-white" style="margin-top: 10px;">음식을 입에 넣는 순간, 치아 표면에 설치된<br>마이크로 센서가 음식의 분자 구조를 포착합니다.</p>
+        </div>
+
+        <div class="timeline-item" style="position: relative; margin-bottom: 100px; padding-left: 60px;">
+          <div style="position: absolute; left: -4px; top: 10px; width: 10px; height: 10px; background-color: white; border-radius: 50%;"></div>
+          <h3 class="freesentation-regular text-onedotfive text-green">맛 성분 분석</h3>
+          <p class="freesentation-extralight text-onedottwo text-white" style="margin-top: 10px;">마이크로 센서가 음식의 당분, 산도, 염도,<br>캡사이신 농도 등을 실시간으로 분석합니다.</p>
+        </div>
+
+        <div class="timeline-item" style="position: relative; margin-bottom: 100px; padding-left: 60px;">
+          <div style="position: absolute; left: -4px; top: 10px; width: 10px; height: 10px; background-color: white; border-radius: 50%;"></div>
+          <h3 class="freesentation-regular text-onedotfive text-green">감각 치환</h3>
+          <p class="freesentation-extralight text-onedottwo text-white" style="margin-top: 10px;">분석된 맛 정보는 외계인의 신경 체계에 맞춘<br>감각 자극으로 변환됩니다.</p>
+        </div>
+
+        <div class="timeline-item" style="position: relative; padding-left: 60px;">
+          <div style="position: absolute; left: -4px; top: 10px; width: 10px; height: 10px; background-color: white; border-radius: 50%;"></div>
+          <h3 class="freesentation-regular text-onedotfive text-green">자극 수용</h3>
+          <p class="freesentation-extralight text-onedottwo text-white" style="margin-top: 10px;">치환된 감각 자극을 느낄 수 있게 됩니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="review-section">
+    <div class="center-spacing3" style="top: 30px; position: relative;">
+      <div class="freesentation-light text-onedotthree text-gray" style="margin-bottom: 10px;">실제 사용 고객 후기</div>
+      <div class="freesentation-semibold text-twodotfive text-green">버크셧 행성의 피클민스완 씨</div>
+    </div>
+
+    <div class="wrap">
+    <img src="cartoon2.png" class="cartoon-img">
+    </div>
+
+    <div class="speech-bubble-green" style="top: 120px; left: 530px; font-weight: bold; min-width: 120px;">BEFORE</div>
+    <div class="speech-bubble-green" style="top: 410px; left: 530px; font-weight: bold; min-width: 120px;">AFTER</div>
+    <div class="speech-bubble-white" style="top: 240px; left: 393px;">
+      인간이 밥을<br>사주었는데도<br>맛 표현을 못 하여<br>눈초리를 받는<br>피클민스완 씨
+    </div>
+    <div class="speech-bubble-white" style="top: 290px; right: 360px;">
+        결국 인간에게<br>맛 표현 좀 해보라고<br>지적받은<br>피클민스완 씨
+    </div>
+    <div class="speech-bubble-white" style="top: 560px; left: 395px;">
+        능숙하게 음식의<br>맛 칭찬을 하는<br>피클민스완 씨
+    </div>
+    <div class="speech-bubble-white" style="top: 570px; right: 370px;">
+        지구인 친구에게<br>좋은 인상을 남긴<br>피클민스완 씨
+    </div>
+  </section>
+    
+  <section class="recommend-section bg-design2">
+    <div class="center-spacing3" style="margin-bottom: 40px;">
+      <div class="freesentation-light text-onedotthree text-white" style="margin-bottom: 10px;">RECOMMENDED FOR</div>
+      <div class="freesentation-semibold text-twodotfive text-green">이런 분들에게 추천합니다</div>
+    </div>
+    <div class="recommend-list text-white">
+      <div class="recommend-item">
+        <span class="recommend-check">
+          <svg viewBox="0 0 24 24"><polyline points="5,13 10,18 19,7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        인간과 자주 교류를 나누고 <span class="text-green">밥약속</span> 을 잡는 외계인
+      </div>
+      <div class="recommend-item">
+        <span class="recommend-check">
+          <svg viewBox="0 0 24 24"><polyline points="5,13 10,18 19,7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        지구의 음식을 <span class="text-green">더 잘 이해</span> 해보고 싶은 외계인
+      </div>
+      <div class="recommend-item">
+        <span class="recommend-check">
+          <svg viewBox="0 0 24 24"><polyline points="5,13 10,18 19,7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="text-green">지구의 요식업</span> 에 종사하거나, 혹은 그럴 예정이 있는 외계인
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <img src="arrow.png" id="earaid" style="position: absolute; top: -30px; left: 500px; transform: translate(-50%, -50%); width: 40px; height: auto; animation: upDown 1s ease-in-out infinite;">
+  </div>
+
+  <section class="bg-gray">
+    <div class="wrap">
+      <div class="title-wrap">
+        <p class="small-top-text encode-sans-condensed text-gray">Infiltration Kit: Become a Perfect Human Being For Intergalactic Aliens Agents Only : 03</p>
+        <h1 class="big-title text-white zen-dots text-logo2">LaughSync Ear Device</h1>
+        <div class="flex" style="position: relative;">
+          <div class="left-area">
+            <h2 class="sub-title freesentation-semibold text-twodotfive text-green scroll-fade">농담 해석 보청기</h2>
+            <p class="description text-white text-onedottwo freesentation-regular scroll-fade">인간들의 유머에 <br> 외계인인 당신만
+                <br> 웃지 말란 법은 없다.</p>
+      
+            <div class="icon-row">
+              <div class="icon">
+                <div class="text-black text-onedotthree zen-dots">99.8%</div>
+                <div class="text-black text-one freesentation-regular">정확도</div>
+              </div>
+              <div class="icon">
+                <div class="text-black text-onedotthree zen-dots">229</div>
+                <div class="text-black text-one freesentation-regular">언어 지원</div>
+              </div>
+            </div>
+          </div>
+          <div class="model-container">
+            <model-viewer 
+              id="hearingaidModel"
+              src="hearingaid.glb" 
+              camera-controls="false"
+              auto-rotate 
+              rotation-per-second="30deg"
+              interaction-prompt="none"
+              camera-orbit="0deg 75deg 150%"
+              exposure="1"
+              shadow-intensity="1"
+              touch-action="pan-y" 
+              style="width: 600px; height: 600px; position: fixed; left: -150px; top: 50px; filter: hue-rotate(90deg) brightness(1.2) saturate(150%); z-index: 2000; pointer-events: none; transform: scaleX(-1) translateZ(0); opacity: 0; transition: opacity 0.5s ease-out, top 0.3s ease-out, left 0.3s ease-out, transform 0.3s ease-out, camera-orbit 0.5s ease-out;"
+              ar>
+            </model-viewer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <div class="wrap">
+      <div class="section-container">
+        
+        <!-- 큰 원 -->
+        <div class="big-circle2"></div>
+        <div class="inner-circle"></div>
+    
+        <!-- 오른쪽 텍스트 블럭 -->
+        <div class="text-block2">
+          <h2 class="section-title sub-title freesentation-semibold text-twodotfive text-white scroll-fade">소리 너머의 유머를 읽는 기술<br><span class="text-green">농담 해석 보청기의 기능</span></h2>
+    
+          <div class="feature">
+            <div class="feature-icon">
+              <img src="icon-7.png">
+            </div>
+            <div class="feature-text">
+              <h3 class="freesentation-regular text-onedotfive text-green name">실시간 농담 해석</h3>
+              <p class="freesentation-extralight text-onedottwo text-white quote">외부의 언어를 즉각 번역하여<br>난이도 있는 농담과 유행어를 실시간 해석</p>
+            </div>
+          </div>
+    
+          <div class="feature feature-offset" style="margin-right: 50px;">
+            <div class="feature-icon">
+              <img src="icon-8.png">
+            </div>
+            <div class="feature-text" style="margin-right: 24px;">
+              <h3 class="freesentation-regular text-onedotfive text-green name">말의 심층적 의도 파악</h3>
+              <p class="freesentation-extralight text-onedottwo text-white quote">말투, 억양, 맥락을 분석하여<br>반어법 유무 체크 가능</p>
+            </div>
+          </div>
+    
+          <div class="feature">
+            <div class="feature-icon">
+              <img src="icon-9.png">
+            </div>
+            <div class="feature-text">
+              <h3 class="freesentation-regular text-onedotfive text-green name">해석 가능한 다양한 슬랭</h3>
+              <p class="freesentation-extralight text-onedottwo text-white quote">유행어, 블랙 유머, 세대 간 언어, 속담, 인용구</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+<section class="bg-0101">
+    <div class="chat-container">
+      <h2 class="section-title sub-title freesentation-semibold text-twodotfive text-white scroll-fadescroll-fade">
+        각종 줄임말과 반어법<br><span class="text-green">해석해주는 보청기</span></h2>
+
+      <div class="chat-message scroll-fade">
+        <div class="chat-icon" style="margin-right: 50px; background-color: #00ff88; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+          <img src="icons-1.png" style="width: 30px; height: 30px;">
+        </div>
+        <div class="chat-bubble">
+          <p class="freesentation-light text-onedottwo text-white">야, 너 자꾸 그러는 거 진짜 아싸같으니까 그만해.</p>
+        </div>
+      </div>
+
+      <div class="chat-message scroll-fade" style="flex-direction: row-reverse;">
+        <div class="chat-icon" style="margin-left: 50px; background-color: #00ff88; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+          <img src="icons-2.png" style="width: 30px; height: 30px;">
+        </div>
+        <div class="chat-bubble response">
+          <p class="freesentation-light text-onedottwo text-white">(아싸가 뭐지? 신날 때 외치는 추임새인가?)</p>
+        </div>
+      </div>
+
+      <div class="chat-message scroll-fade" style="flex-direction: row-reverse;">
+        <div class="chat-icon" style="margin-left: 50px; background-color: #00ff88; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+          <img src="icons-3.png" style="width: 30px; height: 30px;">
+        </div>
+        <div class="chat-bubble">
+          <p class="zen-dots text-onedotthree text-white">LOADING...</p>
+          <p class="freesentation-light text-onedottwo text-white">'아싸'는 '아웃사이더'의 약어로, 무리에 어울리지 못하고 혼자 있는 사람을 말합니다. 주로 사회성이 떨어지는 인간을 비하할 때 사용되는 표현입니다.</p>
+          <p class="freesentation-regular text-onedottwo text-green">사과의 의미를 담은 대답을 하십시오.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+ <section class="review-section">
+    <div class="center-spacing3" style="top: 30px; position: relative;">
+      <div class="freesentation-light text-onedotthree text-gray" style="margin-bottom: 10px;">실제 사용 고객 후기</div>
+      <div class="freesentation-semibold text-twodotfive text-green">소행성 B612의 망지모르 씨</div>
+    </div>
+
+    <div class="wrap">
+    <img src="cartoon3.png" class="cartoon-img">
+    </div>
+
+    <div class="speech-bubble-green" style="top: 120px; left: 530px; font-weight: bold; min-width: 120px;">BEFORE</div>
+    <div class="speech-bubble-green" style="top: 410px; left: 530px; font-weight: bold; min-width: 120px;">AFTER</div>
+    <div class="speech-bubble-white" style="top: 260px; left: 375px;">인간이 망지모르씨를<br>비꼬았는데도<br>알아차리지 못한<br>망지모르 씨
+    </div>
+    <div class="speech-bubble-white" style="top: 290px; right: 370px;">
+      결국 인간에게<br>손절당한<br>망지모르 씨
+    </div>
+    <div class="speech-bubble-white" style="top: 560px; left: 385px;">
+      농담 해석 보청기로<br>지구인의 말이<br>반어법임을 파악한<br>망지모르 씨
+    </div>
+    <div class="speech-bubble-white" style="top: 570px; right: 370px;">
+      빠르게 지구인에게<br>사과할 수 있었던<br>망지모르 씨
+    </div>
+  </section>
+    
+  <section class="recommend-section bg-design3">
+    <div class="center-spacing3" style="margin-bottom: 40px;">
+      <div class="freesentation-light text-onedotthree text-white" style="margin-bottom: 10px;">RECOMMENDED FOR</div>
+      <div class="freesentation-semibold text-twodotfive text-green">이런 분들에게 추천합니다</div>
+    </div>
+    <div class="recommend-list text-white">
+      <div class="recommend-item">
+        <span class="recommend-check">
+          <svg viewBox="0 0 24 24"><polyline points="5,13 10,18 19,7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="text-green">지구의 언어학</span>을 공부하고 있는 외계인
+      </div>
+      <div class="recommend-item">
+        <span class="recommend-check">
+          <svg viewBox="0 0 24 24"><polyline points="5,13 10,18 19,7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        지구인과<span class="text-green">의사소통을 자주 하는</span>외계인 혹은 사회적인 일을 하는 외계인
+      </div>
+      <div class="recommend-item">
+        <span class="recommend-check">
+          <svg viewBox="0 0 24 24"><polyline points="5,13 10,18 19,7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        지구생활을 할 때에<span class="text-green">자주 마찰이 생기지만</span>왜 발생하는지는 모르겠는 외계인
+      </div>
+      <div class="recommend-item">
+        <span class="recommend-check">
+          <svg viewBox="0 0 24 24"><polyline points="5,13 10,18 19,7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        자신의<span id="review" class="text-green">지구 언어 수준</span>을 한 단계 더 높이고 싶은 외계인
+      </div>
+    </div>
+  </section>
+
+  
+
+  <section class="bg-gray">
+    <div class="wrap">
+      <h2 class="section-title2 sub-title freesentation-semibold text-twodotfive text-white scroll-fade">외계인 흉내 키트<br><span class="text-green">실제 사용 후기</span></h2>
+
+      <div class="reviews-container">
+        <div class="review-box scroll-fade">
+          <div class="review-header">
+            <div class="reviewer-avatar"></div>
+            <div class="reviewer-info">
+              <div class="reviewer-name text-white freesentation-light">wee******</div>
+              <div class="star-rating">★★★★★</div>
+            </div>
+          </div>
+          <div class="review-content">
+            <img src="review-img1.png" class="review-image">
+            <div class="review-text freesentation-light text-white">
+              제가 마침 지금 지구에서 현장 실습중인데, 안 그래도 어려운 지구 언어에 인터넷 슬랭까지 배우려니 머리가 터지겠더라구요.
+              그런데 이 키트에 등봉된 보청기는 정말 최고에요. 배송받자마자 바로 뜯어봤어요.<br>
+              <span class="review-highlight">이젠 아무도 제가 외계인이라는 것을 의심하지 않아요!</span><br>
+              개꿀 ^-^ v 히히 @>---- 장미꽃 한 송이
+            </div>
+          </div>
+        </div>
+
+        <div class="review-box scroll-fade">
+          <div class="review-header">
+            <div class="reviewer-avatar"></div>
+            <div class="reviewer-info">
+              <div class="reviewer-name text-white freesentation-light">sd2******</div>
+              <div class="star-rating">★★★★★</div>
+            </div>
+          </div>
+          <div class="review-content">
+            <img src="review-img2.png" class="review-image">
+            <div class="review-text freesentation-light text-white">
+              키트 상자 사용 3개월차<br>
+              처음 틀니를 착용했을 때는 많이 불편했었음<br>
+              근데 차다보니 괜찮아짐 ㅋㅋ 역시 외계인은 적응의 동물이다<br>
+              그리고 들니 간 채로 지구인들이 소위 "쓰다"고 말하는 음식을 먹어봤는데, 진짜 역겨운 느낌 나더라 우엑
+              <span class="review-highlight">왜 내 인간 친구들이 내가 약 싫어했었을 때 이상한 눈 하고 쳐다봤는지 알겠음..</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-box scroll-fade">
+          <div class="review-header">
+            <div class="reviewer-avatar"></div>
+            <div class="reviewer-info">
+              <div class="reviewer-name text-white freesentation-light">Ali******</div>
+              <div class="star-rating">★★★★★</div>
+            </div>
+          </div>
+          <div class="review-content">
+            <img src="review-img3.png" class="review-image">
+            <div class="review-text freesentation-light text-white">
+              제가 지구에 처음 왔을 때, 3차원이 적응이 안 되어서 집 밖으로 나갈 때마다 자주 끼었던 기억이 나요 😅<br>
+              <span class="review-highlight">그 때 이 키트의 차원 동기화 알약이 정말 도움이 많이 되어줬어요!!</span><br>
+              이거 먹고 밖 나가면 멀미도 안 나고 숨이 탁 트이는 느낌 ㅠㅠ<br>
+              아 물론 키트 안의 다른 제품들도 진짜진짜 조와용!!<br>
+              많이 많이 파세요 지.흉.키 짱!!! 💜
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <img src="arrow.png" id="Q&A" style="position: absolute; top: -30px; left: 500px; transform: translate(-50%, -50%); width: 40px; height: auto; animation: upDown 1s ease-in-out infinite;">
+  </div>
+
+  <section class="qa-section">
+    <div class="wrap">
+      <p class="freesentation-light text-onedotthree text-gray" style="margin-bottom: 10px;">Q&A</p>
+      <h2 class="freesentation-semibold text-twodotfive text-green">자주 묻는 질문</h2>
+
+      <div class="qa-container">
+        <div class="qa-item scroll-fade">
+          <div class="qa-question">
+            <div class="qa-icon">Q</div>
+            <div class="qa-text freesentation-light text-onedotthree text-white">
+              차원 동기화 알약의  <span class="text-green">약효 지속 시간</span>은 어느 정도 되나요?
+            </div>
+            <div class="qa-arrow"></div>
+          </div>
+          <div class="qa-answer">
+            <div class="freesentation-light text-onedottwo text-white">
+              외계인별로 개인차인 차이가 있을 수는 있으나, 일반적으로 약효는  <span class="text-green">지구 시간 기준 6~8시간</span>정도 지속됩니다. 연속 복용 시 자아가 인식이 왜곡될 위험이 있으므로 주의해서 복용해 주십시오.
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-item scroll-fade">
+          <div class="qa-question">
+            <div class="qa-icon">Q</div>
+            <div class="qa-text freesentation-light text-onedotthree text-white">
+              예전에 미각 치환 틀니와 비슷한 기구를 사용했었는데,<br><span class="text-green">매운맛의 전자 펄스</span>가 너무 아팠어요. 이 제품도 그럴까요?
+            </div>
+            <div class="qa-arrow"></div>
+          </div>
+          <div class="qa-answer">
+            <div class="freesentation-light text-onedottwo text-white">
+              미각 치환 틀니는 지구인이 느끼는 미각을 최대한 비슷하게 살리기 위하여 매운맛과 가장 비슷한 느낌을 내는 전자 펄스 등과 기능을 넣었습니다.  <span class="text-green">매운맛의 강도는 설정에서 조절</span>할 수 있습니다.
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-item scroll-fade">
+          <div class="qa-question">
+            <div class="qa-icon">Q</div>
+            <div class="qa-text freesentation-light text-onedotthree text-white">
+              보청기가 <span class="text-green">최신 유행어</span>도 설명해주나요?
+            </div>
+            <div class="qa-arrow"></div>
+          </div>
+          <div class="qa-answer">
+            <div class="freesentation-light text-onedottwo text-white">
+              농담 해석 보청기는 지구의 네트워크를 기반으로 해석하기 때문에, <span class="text-green">계속해서 새로운 유행어와 은어들이 업데이트되어 실시간 반영</span>됩니다. 보청기를 네트워크에 연결시켜 두는 것을 잊지 마십시오.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <footer style="background: #111; padding: 100px 0; margin-top: 100px;">
+    <div class="wrap">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+        <div>
+          <h2 class="zen-dots text-white" style="font-size: 2rem; margin-bottom: 30px;">Human<br>Mimic Kit :<br>for Aliens</h2>
+        </div>
+        
+        <div>
+          <h3 class="encode-sans-condensed text-white" style="margin-bottom: 20px;">resouces</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 15px;"><a href="#" class="encode-sans-condensed text-gray">Application</a></li>
+            <li style="margin-bottom: 15px;"><a href="#" class="encode-sans-condensed text-gray">Documentation</a></li>
+            <li style="margin-bottom: 15px;"><a href="#" class="encode-sans-condensed text-gray">Systems</a></li>
+            <li style="margin-bottom: 15px;"><a href="#" class="encode-sans-condensed text-gray">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="encode-sans-condensed text-white" style="margin-bottom: 20px;">pricing</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 15px;"><a href="#" class="encode-sans-condensed text-gray">Overview</a></li>
+            <li style="margin-bottom: 15px;"><a href="#" class="encode-sans-condensed text-gray">Premium Kit</a></li>
+            <li style="margin-bottom: 15px;"><a href="#" class="encode-sans-condensed text-gray">Promotions</a></li>
+            <li style="margin-bottom: 15px;"><a href="#" class="encode-sans-condensed text-gray">Others</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="encode-sans-condensed text-white" style="margin-bottom: 20px;">company</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 15px;"><a href="#" class="encode-sans-condensed text-gray">About us</a></li>
+            <li style="margin-bottom: 15px;"><a href="#" class="encode-sans-condensed text-gray">Blog</a></li>
+            <li style="margin-bottom: 15px;"><a href="#" class="encode-sans-condensed text-gray">Partnerships</a></li>
+            <li style="margin-bottom: 15px;"><a href="#" class="encode-sans-condensed text-gray">Press</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="encode-sans-condensed text-white" style="margin-bottom: 20px;">social</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 15px;"><a href="#" class="encode-sans-condensed text-gray">Galaxbook</a></li>
+            <li style="margin-bottom: 15px;"><a href="#" class="encode-sans-condensed text-gray">Alitter</a></li>
+            <li style="margin-bottom: 15px;"><a href="#" class="encode-sans-condensed text-gray">Instaplanet</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Q&A Accordion
+      document.querySelectorAll('.qa-question').forEach(question => {
+        question.addEventListener('click', () => {
+          const item = question.parentElement;
+          const isActive = item.classList.contains('active');
+          
+          // Close all other items
+          document.querySelectorAll('.qa-item').forEach(otherItem => {
+            otherItem.classList.remove('active');
+          });
+          
+          // Toggle current item
+          if (!isActive) {
+            item.classList.add('active');
+          }
+        });
+      });
+
+      // Scroll animations for bubbles, recommends, and fade elements
+      const bubbles = document.querySelectorAll('.speech-bubble-green, .speech-bubble-white');
+      const recommends = document.querySelectorAll('.recommend-item');
+      const scrollFades = document.querySelectorAll('.scroll-fade');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (entry.target.classList.contains('recommend-item')) {
+              entry.target.classList.add('recommend-visible');
+            } else if (entry.target.classList.contains('scroll-fade')) {
+              entry.target.classList.add('visible');
+            } else {
+              entry.target.classList.add('speech-bubble-visible');
+            }
+          }
+        });
+      }, { threshold: 0.2 });
+
+      bubbles.forEach(bubble => observer.observe(bubble));
+      recommends.forEach(item => observer.observe(item));
+      scrollFades.forEach(el => observer.observe(el));
+
+      // Pills model animation
+      const pillsModel = document.getElementById('pillsModel');
+      const targetCircle = document.querySelector('.big-circle2');
+      const initialSection = document.querySelector('.big-title');
+      
+      function updateModelPosition() {
+        const circleRect = targetCircle.getBoundingClientRect();
+        const initialRect = initialSection.getBoundingClientRect();
+        
+        if (initialRect.top <= window.innerHeight) {
+          pillsModel.style.opacity = '1';
+          
+          if (circleRect.top <= window.innerHeight) {
+            const progress = Math.min(1, Math.max(0, 
+              Math.pow((window.innerHeight - circleRect.top) / window.innerHeight, 0.3)
+            ));
+            
+            const initialY = initialRect.top + 350;
+            const targetY = circleRect.top + 300;
+            const currentY = initialY + (targetY - initialY) * progress;
+            const scale = 1 + (progress * 1);
+            const verticalAngle = 75 - (progress * 15);
+            const initialRight = 200;
+            const targetRight = 1200;
+            const currentRight = initialRight + (targetRight - initialRight) * progress;
+            
+            pillsModel.style.top = `${currentY}px`;
+            pillsModel.style.right = `${currentRight}px`;
+            pillsModel.style.transform = `translateY(-50%) scale(${scale})`;
+            pillsModel.setAttribute('camera-orbit', `0deg ${90 - verticalAngle}deg 150%`);
+          } else {
+            pillsModel.style.top = `${initialRect.top + 350}px`;
+            pillsModel.style.right = '200px';
+            pillsModel.style.transform = 'translateY(-50%) scale(1)';
+            pillsModel.setAttribute('camera-orbit', '0deg 75deg 150%');
+          }
+        } else {
+          pillsModel.style.opacity = '0';
+        }
+      }
+
+      window.addEventListener('scroll', updateModelPosition);
+      window.addEventListener('load', updateModelPosition);
+      window.addEventListener('resize', updateModelPosition);
+
+      // Kitbox and object image animations
+      const kitboxObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      const objectObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('show');
+            }, 100);
+          }
+        });
+      }, { 
+        threshold: 0.5,
+        rootMargin: '0px'
+      });
+
+      document.querySelectorAll('.kitbox-img1, .kitbox-img2, .kitbox-img3').forEach(img => {
+        kitboxObserver.observe(img);
+      });
+
+      document.querySelectorAll('.object1-img, .object2-img, .object3-img').forEach(img => {
+        objectObserver.observe(img);
+      });
+
+      // 스프레드 이미지 애니메이션
+      const spreadObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+          }
+        });
+      }, { threshold: 0.2 });
+
+      document.querySelectorAll('.spread-img').forEach(img => {
+        spreadObserver.observe(img);
+      });
+
+      // 틀니 모델 스크롤 애니메이션
+      const dentureModel = document.getElementById('dentureModel');
+      const dentureInitialSection = document.querySelector('.title-wrap');
+      const dentureTargetCircle = document.querySelector('.big-circle3');
+      
+      function updateDenturePosition() {
+        const initialRect = dentureInitialSection.getBoundingClientRect();
+        const circleRect = dentureTargetCircle.getBoundingClientRect();
+        
+        if (initialRect.top <= window.innerHeight) {
+          dentureModel.style.opacity = '1';
+          
+          if (circleRect.top <= window.innerHeight) {
+            const progress = Math.min(1, Math.max(0, 
+              (window.innerHeight - circleRect.top) / window.innerHeight
+            ));
+            
+            const initialLeft = -150;
+            const targetLeft = 1100;
+            const currentLeft = initialLeft + (targetLeft - initialLeft) * progress;
+            
+            const initialTop = 50;
+            const targetTop = circleRect.top + 1300;
+            const currentTop = initialTop + (targetTop - initialTop) * progress;
+            
+            // 카메라 각도 변경
+            const initialAngle = 75;
+            const targetAngle = 0;
+            const currentAngle = initialAngle - (initialAngle - targetAngle) * progress;
+            
+            dentureModel.style.left = `${currentLeft}px`;
+            dentureModel.style.top = `${currentTop}px`;
+            dentureModel.style.transform = `scaleX(-1) scale(${1 + progress})`;
+            dentureModel.setAttribute('camera-orbit', `0deg ${currentAngle}deg 150%`);
+          } else {
+            dentureModel.style.left = '-150px';
+            dentureModel.style.top = '50px';
+            dentureModel.style.transform = 'scaleX(-1)';
+            dentureModel.setAttribute('camera-orbit', '0deg 75deg 150%');
+          }
+        } else {
+          dentureModel.style.opacity = '0';
+        }
+      }
+
+      window.addEventListener('scroll', updateDenturePosition);
+      window.addEventListener('resize', updateDenturePosition);
+      updateDenturePosition();
+
+      // 보청기 모델 스크롤 애니메이션
+      const hearingaidModel = document.getElementById('hearingaidModel');
+      const hearingaidSection = document.querySelector('.bg-gray:nth-of-type(3)');
+      const hearingaidTitle = hearingaidSection.querySelector('.big-title');
+      const hearingaidCircle = document.querySelector('.big-circle3');
+
+      function updateHearingaidPosition() {
+        const sectionRect = hearingaidSection.getBoundingClientRect();
+        const titleRect = hearingaidTitle.getBoundingClientRect();
+        const circleRect = hearingaidCircle.getBoundingClientRect();
+
+        if (sectionRect.top <= window.innerHeight && sectionRect.bottom >= 0) {
+          if (titleRect.top <= 0) {
+            if (circleRect.top <= window.innerHeight) {
+              const progress = Math.min(1, Math.max(0, 
+                (window.innerHeight - circleRect.top) / window.innerHeight
+              ));
+              
+              const initialRight = 200;
+              const targetRight = 1200;
+              const currentRight = initialRight + (targetRight - initialRight) * progress;
+              
+              const initialTop = 350;
+              const targetTop = circleRect.top + 300;
+              const currentTop = initialTop + (targetTop - initialTop) * progress;
+              
+              hearingaidModel.style.position = 'fixed';
+              hearingaidModel.style.right = `${currentRight}px`;
+              hearingaidModel.style.top = `${currentTop}px`;
+              hearingaidModel.style.transform = `scaleX(-1) scale(${1 + progress})`;
+              hearingaidModel.setAttribute('camera-orbit', `0deg ${75 - progress * 75}deg 150%`);
+            } else {
+              hearingaidModel.style.position = 'fixed';
+              hearingaidModel.style.right = '200px';
+              hearingaidModel.style.top = '350px';
+              hearingaidModel.style.transform = 'scaleX(-1)';
+              hearingaidModel.setAttribute('camera-orbit', '0deg 75deg 150%');
+            }
+          } else {
+            hearingaidModel.style.position = 'absolute';
+            hearingaidModel.style.right = '200px';
+            hearingaidModel.style.top = '350px';
+            hearingaidModel.style.transform = 'scaleX(-1)';
+            hearingaidModel.setAttribute('camera-orbit', '0deg 75deg 150%');
+          }
+        }
+      }
+
+      window.addEventListener('scroll', updateHearingaidPosition);
+      window.addEventListener('resize', updateHearingaidPosition);
+      updateHearingaidPosition();
+    });
+  </script>
+
+
+
+    </body>
+</html>
